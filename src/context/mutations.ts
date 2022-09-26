@@ -1,0 +1,3 @@
+export const SET_USERS = 'SET_USERS'
+export const SET_SELECTED_USER = 'SET_SELECTED_USER'
+export const SET_NEW_MESSAGE = 'SET_NEW_MESSAGE'

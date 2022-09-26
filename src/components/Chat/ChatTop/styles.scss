@@ -1,0 +1,11 @@
+.chat-top {
+  height: 73px;
+  padding: 0 35px;
+  background-color: var(--light);
+  border-bottom: 1px solid var(--grey-light);
+  // box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+
+  &__name {
+    color: var(--primary);
+  }
+}
