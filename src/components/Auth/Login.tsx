@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import api from '@/utils/api'
-import { setUserToken } from '@/utils/localStorage'
+import { setLocalUser, setUserToken } from '@/utils/localStorage'
 import { CInput } from '../CInput'
 
 export const Login = () => {
@@ -17,14 +17,14 @@ export const Login = () => {
       const { data } = await api.post('/signin', {
         email,
         password
-      })
-      
+      })      
       
       dispatch({
         type: 'SET_LOGGED_USER',
         payload: data.user
       })
 
+      setLocalUser(data.user)
       setUserToken(data.token)
     } catch (error) {
       console.log(error)
@@ -52,7 +52,7 @@ export const Login = () => {
             value={password}
           />
 
-          <button type='submit'>Entrar</button>
+          <button type='submit'>signin</button>
         </div>
       </form>
     </div>

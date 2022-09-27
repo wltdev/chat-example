@@ -6,7 +6,7 @@ export interface IUser {
   name?: string
   email?: string
   photo?: string
-  latest?: IMessage
+  latestMessage?: IMessage
 }
 
 interface State {
@@ -16,7 +16,7 @@ interface State {
 
 const DEFAULT_VALUE: State = {
   user: { id: 'fake-1' },
-  isLogged: true
+  isLogged: false
 }
 
 export type ActionType = {

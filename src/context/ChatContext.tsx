@@ -1,20 +1,27 @@
 import React, { ReactNode, useReducer, createContext, useContext } from 'react'
 import { IUser } from './AuthContext'
-import { SET_NEW_MESSAGE, SET_SELECTED_USER, SET_USERS } from './mutations'
+import { SET_NEW_MESSAGE, SET_SELECTED_USER, SET_USERS, SET_READ_MESSAGE, SET_READ_MESSAGE_ALL } from './mutations'
 
 export interface IMessage {
   id: string
-  body: string
+  message: string
   createdAt: string
   receiverId: string
   senderId: string
   read: boolean
 }
 
+type ALL_READ = {
+  otherUser: string
+  senderId: string
+}
+
 interface State {
   users: IUser[]
   selectedUser: IUser
   newMessage?: IMessage
+  readMessage?: IMessage
+  allMessageRead?: ALL_READ
 }
 
 const DEFAULT_VALUE: State = {
@@ -43,6 +50,16 @@ const reducer = (state: State, action: ActionType) => {
     return {
       ...state,
       newMessage: action.payload
+    }
+  case SET_READ_MESSAGE:
+    return {
+      ...state,
+      readMessage: action.payload
+    }
+  case SET_READ_MESSAGE_ALL:
+    return {
+      ...state,
+      allMessageRead: action.payload
     }
   case 'RESET':
     return {

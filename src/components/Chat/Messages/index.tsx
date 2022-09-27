@@ -4,6 +4,8 @@ import { IMessage, useChat } from '@/context/ChatContext'
 import './style.scss'
 import { getMessages } from '@/utils/messages'
 import { useAuth } from '@/context/AuthContext'
+import readImg from '@/assets/img/read.png'
+import unreadImg from '@/assets/img/unread.png'
 
 export const Messages = () => {
   const messagesRef = useRef<HTMLDivElement>(null)
@@ -11,19 +13,43 @@ export const Messages = () => {
   const { state: authState } = useAuth()
   const { state } = useChat()
 
-  const loadMessages = () => {
-    const users = [authState.user.id, state.selectedUser.id]
-    const data = getMessages(users)
+  const loadMessages = async () => {
+    setMessages([])
+    const data = await getMessages(state.selectedUser.id)
     setMessages(data)
   }
 
-  useEffect(() => loadMessages(), [])
+  useEffect(() => {
+    loadMessages()
+  }, [state.selectedUser])
   
   useEffect(() => {
-    if (state.newMessage) {
-      setMessages([...messages, state.newMessage])
+    if (state.newMessage && 
+      (
+        state.newMessage.senderId === state.selectedUser.id || 
+        state.newMessage.receiverId === state.selectedUser.id
+      )
+    ) {
+      const data = [...messages, state.newMessage] 
+      setMessages(data)
     }
   }, [state.newMessage])
+
+  useEffect(() => {
+    if (state.readMessage) {
+      const updatedMessages = messages.map((message) => message.id === state.readMessage?.id ? state.readMessage : message)
+      setMessages(updatedMessages)
+    }
+  }, [state.readMessage])
+
+  useEffect(() => {
+    if (state.allMessageRead) {
+      if (state.allMessageRead.otherUser === authState.user.id) {
+        const updatedMessages = messages.map((message) => ({ ...message, read: true }))
+        setMessages(updatedMessages)
+      }
+    }
+  }, [state.allMessageRead])
 
   useEffect(() => {
     // scroll to bottom every time messages are changed
@@ -40,7 +66,10 @@ export const Messages = () => {
       <div className="messages">
         {messages.map((message) => (
           <div key={message.id} className={`bubble ${message.senderId === authState.user.id ? 'me' : 'other'}`}>
-            <span>{message.body}</span>
+            <span>{message.message}</span>
+            {message.senderId === authState.user.id && (
+              <img className='status-img' src={message.read ? readImg : unreadImg} />
+            )}
           </div>
         ))}        
       </div>

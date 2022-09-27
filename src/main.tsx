@@ -4,6 +4,11 @@ import App from './App'
 import './index.css'
 import { AppContextProvider } from '@/context/AppContext'
 
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(localizedFormat)
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <AppContextProvider>

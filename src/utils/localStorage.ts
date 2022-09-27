@@ -1,12 +1,10 @@
-import { UserType } from '@/context/AuthContext'
+import { IUser } from '@/context/AuthContext'
 
 const USER_DATA = '@chat-user'
 const USER_TOKEN = '@chat-token'
 
-export const setLocalUser = (user: UserType) =>
+export const setLocalUser = (user: IUser) =>
   window.localStorage.setItem(USER_DATA, JSON.stringify(user))
-
-export const setUserToken = (token: string) => window.localStorage.setItem(USER_TOKEN, token)
 
 export const getLocalUser = () => {
   const data = window.localStorage.getItem(USER_DATA)
@@ -16,6 +14,7 @@ export const getLocalUser = () => {
   return
 }
 
+export const setUserToken = (token: string) => window.localStorage.setItem(USER_TOKEN, token)
 export const getUserToken = () => window.localStorage.getItem(USER_TOKEN)
 
 export const logout = () => {

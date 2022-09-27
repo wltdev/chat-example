@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import api from '@/utils/api'
-import { setUserToken } from '@/utils/localStorage'
+import { setLocalUser, setUserToken } from '@/utils/localStorage'
 import { CInput } from '../CInput'
 
 export const Register = () => {
@@ -26,7 +26,7 @@ export const Register = () => {
         type: 'SET_LOGGED_USER',
         payload: data.user
       })
-
+      setLocalUser(data.user)
       setUserToken(data.token)
     } catch (error) {
       console.log(error)

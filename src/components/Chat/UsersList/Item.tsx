@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { IUser } from '@/context/AuthContext'
 import profileImg from '@/assets/img/profile-1.jpg'
 import { useChat } from '@/context/ChatContext'
@@ -7,7 +8,7 @@ type Props = {
   isActive?: boolean
 }
 
-export const Item = ({ user }: Props) => {  
+export const Item = ({ user }: Props) => {
   const { state, dispatch } = useChat()
 
   const setSelectUser = () => {
@@ -25,11 +26,11 @@ export const Item = ({ user }: Props) => {
         </div>
         <div className="item__name">
           <span className="name">{user.name}</span>
-          <span className="message"> asd asd as ad asd asd s daLatest message asdasdasd</span>
+          <span className="message">{user.latestMessage?.message}</span>
         </div>
       </div>
       <div className="item__date">
-        {user.latest && user.latest.createdAt}
+        {user.latestMessage && dayjs(user.latestMessage.createdAt).format('LT')}
       </div>
     </div>
   )

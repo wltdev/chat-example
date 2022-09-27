@@ -17,7 +17,6 @@ export const Auth = () => {
       {registring && <Register />}
 
       <div className="auth__footer">
-        <p>Or</p>
         <a onClick={() => setRegistring(!registring)}>{!registring ? 'Register' : 'Back'}</a>
       </div>
     </div>

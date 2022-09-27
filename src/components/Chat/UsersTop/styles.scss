@@ -1,0 +1,26 @@
+.users-top {
+  height: 61px;
+  padding: 0 20px;
+  background-color: var(--light);
+  border-bottom: 1px solid #e9edef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__name {
+    color: var(--primary);
+    font-size: 0.9rem;
+    span {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+  }
+
+  &__signout {
+    cursor: pointer;
+    border: none;
+    color: var(--primary);
+    width: 25px;
+    height: 25px;
+  }
+}

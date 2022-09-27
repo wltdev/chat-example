@@ -10,8 +10,8 @@ export const UsersList = () => {
   const { state } = useChat()
   const { state: authState } = useAuth()
 
-  const loadUsers = () => {
-    const data = getUsers()
+  const loadUsers = async () => {
+    const data = await getUsers()
     setUsers(data)
   }
 
@@ -22,8 +22,13 @@ export const UsersList = () => {
     }
   }
 
-  useEffect(() => loadUsers(), [])
-  useEffect(() => handlerUsers(), [state.newMessage])
+  useEffect(() => {
+    loadUsers()
+  }, [])
+
+  useEffect(() => {
+    handlerUsers()
+  }, [state.newMessage])
 
   return (
     <div className="list">
