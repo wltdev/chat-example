@@ -68,7 +68,7 @@ export const Messages = () => {
           <div key={message.id} className={`bubble ${message.senderId === authState.user.id ? 'me' : 'other'}`}>
             <span>{message.message}</span>
             {message.senderId === authState.user.id && (
-              <img className='status-img' src={message.read ? readImg : unreadImg} />
+              <img className='status' src={message.read ? readImg : unreadImg} />
             )}
           </div>
         ))}        

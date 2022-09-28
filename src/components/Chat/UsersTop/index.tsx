@@ -15,7 +15,7 @@ export const UsersTop = () => {
 
   return (
     <div className="users-top">
-      { authState.user.photo && <img src={authState.user.photo} />}
+      {/* { authState.user.photo && <img src={authState.user.photo} />} */}
       <div className="users-top__name">
         Hi, <span>{authState.user.name}</span>
       </div>

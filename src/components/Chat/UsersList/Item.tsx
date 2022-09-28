@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { IUser } from '@/context/AuthContext'
-import profileImg from '@/assets/img/profile-1.jpg'
+import profileImg from '@/assets/img/default-user.png'
 import { useChat } from '@/context/ChatContext'
 
 type Props = {
